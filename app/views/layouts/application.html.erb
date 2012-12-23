@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bookmarker in the cloud</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="#">Bookmarker</a>
+				<div class="nav-collapse collapse">
+					<% if session[:user] %>
+						<p class="navbar-text pull-right">
+							<%= link_to session[:user].name, user_path(session[:user]), :class => 'navbar-link' %> |
+							<%= link_to 'Logout', accounts_logout_path, :class => 'navbar-link' %>							
+						</p>
+					<% else %>
+						<div class="navbar-text pull-right">
+						<%= form_tag('/accounts/login', :class => 'form-inline') do %>
+							<%= text_field_tag :email, params[:email], :class => 'input-medium', :style => 'font-size: small; height: 15px;', :placeholder => 'Email' %>
+							<%= password_field_tag :password, params[:password], :class => 'input-medium', :style => 'font-size: small; height: 15px;', :placeholder => 'Password' %>
+							<%= submit_tag("Login", :class => 'btn btn-small') %>								
+						<% end %>							
+						</div>
+					<% end %>
+					<ul class="nav">
+						<%= content_tag(:li, link_to('Home', home_index_path), :class => @home_active) %>
+						<%= content_tag(:li, link_to('My Bookmarks', bookmarks_path), :class => @bookmarks_active) %>
+						<%= content_tag(:li, link_to('Popular Bookmarks', popular_bookmarks_path), :class => @pop_bookmarks_active) %>						
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span8">
+				<%= yield %>							  
+			</div><!--/span-->
+			<div class="span4">
+				<% if @pinned_bookmarks %>
+				<div class="well">
+					<h3>Pinned</h3>
+					<table>
+						<% @pinned_bookmarks.each do |pinned_bookmark| %>
+							<tr><td><%= link_to pinned_bookmark.name, pinned_bookmark.web_page.url %></td></tr>
+						<% end %>						                   
+					</table>
+				</div>
+				<% end %>
+			</div><!--/span-->
+		</div><!--/row-->
+		
+		<hr>
+		
+		<footer>
+			<ul id="footer">
+				<li><a href="#">About Me</a></li>
+				<li><a href="#">Contact Me</a></li>
+				<li><a href="#">Tools</a></li>				
+			</ul>
+		</footer>
+			
+	</div><!--/.fluid-container-->
+	
+</body>
+</html>

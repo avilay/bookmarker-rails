@@ -1,0 +1,19 @@
+<h1>Account Details</h1>
+<p class="text-success"><%= notice %></p>
+<div class="row-fluid">
+	<div class="span2">
+		<strong>Name</strong>
+	</div>
+	<div class="span10">
+		<%= @user.name %>
+	</div>	
+</div>
+<div class="row-fluid">
+	<div class="span2">
+		<strong>Email</strong>
+	</div>
+	<div class="span10">
+		<%= @user.email %>
+	</div>	
+</div>
+<%= link_to 'Change settings', edit_user_path, :class => 'btn' %>

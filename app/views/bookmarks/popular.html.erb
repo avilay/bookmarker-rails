@@ -1,0 +1,22 @@
+<h1>Popular Bookmarks</h1>
+
+<div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Web Page</th>
+				<th>Popularity</th>
+			</tr>
+		</thead>
+		<tbody>	
+		<% @pop_links.each do |pop_link| %>
+			<tr>
+				<td><%= link_to pop_link.title, pop_link.url %></td>			
+				<td><%= pop_link.popularity %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+
+

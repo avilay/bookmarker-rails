@@ -1,0 +1,34 @@
+<%= form_for(@bookmark) do |f| %>
+<% if @bookmark.errors.any? %>
+	<div id="text-error">
+		<h2><%= pluralize(@bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
+		<ul>
+		<% @bookmark.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+		</ul>
+	</div>
+<% end %>
+	<fieldset>
+		<legend>Fill in the following details</legend>		
+		<div style="margin-bottom: 10px;">
+			<label><strong>Url</strong></label>
+			<%= link_to @bookmark.web_page.url, @bookmark.web_page.url %>        
+		</div>
+		<div style="margin-bottom: 10px;">
+			<%= f.label :name %>
+    		<%= f.text_field :name %>                        
+		</div>
+		<div style="margin-bottom: 10px;">
+			<%= f.label :notes %>
+    		<%= f.text_area :notes, :rows => '3' %>            
+		</div>  
+		<div style="margin-bottom: 10px;">
+			<label><strong>Added On</strong></label>    
+			<%= @bookmark.added_on.strftime("%d %b %Y") %>
+		</div>              						
+	</fieldset>	
+  <div class="actions">
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+  </div>
+<% end %>

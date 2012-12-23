@@ -1,0 +1,27 @@
+<h1>Details</h1>
+<p class="text-success"><%= notice %></p>
+<fieldset>
+	<legend>Bookmark</legend>
+	<div style="margin-bottom: 10px;">
+		<label><strong>Url</strong></label>
+		<%= link_to @bookmark.web_page.url, @bookmark.web_page.url %>						    
+	</div>
+	<div style="margin-bottom: 10px;">
+		<label><strong>Name</strong></label>
+		<%= @bookmark.name %>
+	</div>
+	<div style="margin-bottom: 10px;">
+		<label><strong>Notes</strong></label>
+		<%= @bookmark.notes %>            
+	</div>
+	<div style="margin-bottom: 10px;">
+		<label><strong>Added On</strong></label>    
+		<%= @bookmark.added_on.strftime("%d %b %Y") %>
+	</div>                					
+</fieldset>
+<p>
+	
+	<%= link_to 'Pin', pin_bookmark_path(@bookmark), :method => :put, :class => 'btn btn-inverse' %>
+	<%= link_to 'Edit', edit_bookmark_path(@bookmark), :class => 'btn btn-warning' %>	
+	<%= link_to 'Delete', @bookmark, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>	
+</p>

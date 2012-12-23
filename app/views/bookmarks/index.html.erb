@@ -1,0 +1,27 @@
+<h1>My Bookmarks</h1>
+<p class="text-success"><%= notice %></p>
+<div style="padding-top: 5px; margin-bottom: 10px;">
+	<%= link_to 'Add new bookmark', new_bookmark_path, :class => 'btn btn-success'%>	
+</div>
+
+<div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Bookmark</th>
+				<th>Added On</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>	
+		<% @bookmarks.each do |bookmark| %>
+			<tr>
+				<td><%= link_to bookmark.name, bookmark.web_page.url %></td>			
+				<td><%= bookmark.added_on.strftime("%d %b %Y") %></td>
+				<td><%= link_to 'Details', bookmark, :class => 'muted' %></td>			
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+<%= will_paginate @orders, :renderer => BootstrapPagination::Rails %>
